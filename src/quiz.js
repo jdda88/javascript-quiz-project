@@ -16,15 +16,19 @@ class Quiz {
   }
 
   shuffleQuestions() {
-    for (let i = this.questions.length - 1; i > 0; i--) {
-      const newQuestions = Math.floor(Math.random() * (i + 1)); //randomIndex re mane it
-      [this.questions[i]],
-        (this.questions[newQuestions] = [
-          this.questions[newQuestions],
-          this.questions[i],
-        ]);
-      ///[1, 2, 3, 4, 5]    [2, 1, 4, 3, 5]
+
+      for (let i = this.questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
     }
+      // const newQuestion = Math.floor(Math.random() * (i + 1)); //randomIndex re mane it
+      // [this.questions[i]],
+      //   (this.questions[newQuestions] = [
+      //     this.questions[newQuestions],
+      //     this.questions[i],
+      //   ]);
+      ///[1, 2, 3, 4, 5]    [2, 1, 4, 3, 5]
+    
   }
 
   checkAnswer(answer) {
@@ -33,9 +37,10 @@ class Quiz {
     // }
 
     if (answer) {
-      if (this.questions[this.currentQuestionIndex].answer === answer) {
+      if (this.questions[this.currentQuestionIndex - 1].answer === answer) {
         this.correctAnswers++;
-      }
+        console.log("correct answer!")
+      } 
     } else {
       alert("Please provide an answer");
     }
@@ -76,10 +81,4 @@ class Quiz {
           let average = sum / this.questions.length;
       return average
   }
-
-
 }
-
-
-
-
